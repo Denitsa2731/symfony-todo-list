@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TO DO LIST{% endblock %}
+
+{% block body %}
+<h1>Tasks</h1>
+
+
+
+{# Ako imame nqkakvi zadacha #}
+{% if articles %} 
+<div class="col-md-5">
+    <table id="articles" class="table-striped">
+        <thead>
+            <tr>
+                <th> Title</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        
+            {% for article in articles %}
+           
+            <tr>
+                <td>
+                
+                <input type="checkbox"
+                               class="check-box mark-article"
+                               data-id="{{article.id}}"
+                               {% if article.checked %} checked {% endif %}
+                               />
+                {{ article.title }}</td>
+                <td>
+                 <a href="/article/{{article.id}}"
+                  class="btn btn-dark">Show</a>      
+                  <a href="#"
+                  class="btn btn-danger delete-article" data-id="{{article.id}}">Delete</a> 
+                  <a href="/article/edit/{{article.id}}"
+                  class="btn btn-light">Edit</a> 
+                </td>
+            </tr>
+            
+           </div>
+            {% endfor %}
+            
+
+        </tbody>
+    </table>
+   
+{% else %}
+    {# ako nqmame zadachi - pokaji tekst #}
+    <div class="todo-item">
+                    <div class="empty">
+                        <img src="img/f.png" width="50%" />
+                        <img src="img/Ellipsis.gif" width="80px">
+                    </div>
+{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/main.js"></script>
+
+{% endblock %}
